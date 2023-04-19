@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "511025254025",
+    "project_id": "nibble-blood-donor",
+    "storage_bucket": "nibble-blood-donor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511025254025:android:26cd9ca2471a0861c7c058",
+        "android_client_info": {
+          "package_name": "com.example.nibbleblooddonor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511025254025-hpq3bn2fo2vtbubger0cafca791gu5q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nibbleblooddonor",
+            "certificate_hash": "bccbcc373ed12945c647ad074edf05a1b408958e"
+          }
+        },
+        {
+          "client_id": "511025254025-r7rapdhb6snd25ai52btnv5hc6acta6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOa_LAQJHRUDRWROus5OG84TDUSq5BpXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511025254025-r7rapdhb6snd25ai52btnv5hc6acta6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
