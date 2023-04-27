@@ -31,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -91,7 +92,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                 final String fullName = registerFullName.getText().toString().trim();
                 final String id = registerIdNumber.getText().toString().trim();
                 final String phone = registerPhoneNumber.getText().toString().trim();
-                final String spinner = bloodGroupsSpinner.getSelectedItem().toString();
+                final String bloodGroup = bloodGroupsSpinner.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(email)){
 
@@ -128,7 +129,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
 
                 }
 
-                if (spinner.equals("Select your blood group")){
+                if (bloodGroup.equals("Select your blood group")){
 
                     Toast.makeText(DonorRegistrationActivity.this, "Blood group is required!!", Toast.LENGTH_SHORT).show();
                     return;
@@ -163,9 +164,9 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                 userinfo.put("password", password);
                                 userinfo.put("phone", phone);
                                 userinfo.put("idNumber", id);
-                                userinfo.put("bloodGroup", spinner);
+                                userinfo.put("bloodGroup", bloodGroup);
                                 userinfo.put("type", "donor");
-                                userinfo.put("search", "donor" + spinner);//This helps us to filter the blood groups in the spinner
+                                userinfo.put("search", "donor" + bloodGroup);//This helps us to filter the blood groups in the spinner
 
                                 userDatabaseRef.updateChildren(userinfo).addOnCompleteListener(new OnCompleteListener() {
                                     @Override
@@ -180,7 +181,7 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                             Toast.makeText(DonorRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
 
                                         }finish();
-                                        loader.dismiss();
+                                        //loader.dismiss();
 
                                     }
                                 });
@@ -223,8 +224,22 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Uri uri) {
 
+                                                        String imageUrl = uri.toString();
+                                                        Map newImageMap = new HashMap();
+                                                        newImageMap.put("profilepictureurl", imageUrl);
 
+                                                        userDatabaseRef.updateChildren(newImageMap).addOnCompleteListener(new OnCompleteListener() {
+                                                            @Override
+                                                            public void onComplete(Task task) {
 
+                                                                if (task.isSuccessful()){
+                                                                    Toast.makeText(DonorRegistrationActivity.this, "imageUrl added to database successfully", Toast.LENGTH_SHORT).show();
+                                                                }else {
+                                                                    Toast.makeText(DonorRegistrationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                                }
+
+                                                            }
+                                                        }); finish();
                                                     }
                                                 });
 
@@ -232,10 +247,12 @@ public class DonorRegistrationActivity extends AppCompatActivity {
                                         }
                                     });
 
+                                    startActivity(new Intent(DonorRegistrationActivity.this, MainActivity.class));
+                                    loader.dismiss();
+
                                 }
 
                             }
-
                         }
                     });
 
